@@ -57,9 +57,16 @@ st.markdown("---")
 
 # --- BOTÃO DE CÁLCULO ---
 if st.button("🧮 Calcular Média Final", use_container_width=True):
-    # Cálculo das médias das listas
-    media_av1 = sum(notas_av1) / len(notas_av1) if shortcut_av1 := len(notas_av1) else 0
-    media_av2 = sum(notas_av2) / len(notas_av2) if shortcut_av2 := len(notas_av2) else 0
+    # Cálculo seguro das médias das listas (sem o operador que causou erro)
+    if len(notas_av1) > 0:
+        media_av1 = sum(notas_av1) / len(notas_av1)
+    else:
+        media_av1 = 0
+        
+    if len(notas_av2) > 0:
+        media_av2 = sum(notas_av2) / len(notas_av2)
+    else:
+        media_av2 = 0
     
     # Fórmula do papel: ((4 * Média AV1) + (4 * AV3) + (2 * Média AV2)) / 10
     media_final = ((4 * media_av1) + (4 * nota_av3) + (2 * media_av2)) / 10
